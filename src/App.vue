@@ -48,6 +48,26 @@ export default{
 .link-light {
   color: #fff;
 }
+
+button,
+.router-button{
+  transition:500ms ease all;
+  cursor: pointer;
+  margin-top: 24px;
+  padding: 12px 24px;
+  background-color: #303030;
+  color:#fff;
+  border-radius: 20px;
+  border: none;
+  text-transform: uppercase;
+  &:focus{
+    outline:none;
+  }
+  &:hover{
+    background-color: rgba(48,48,48,0.7);
+  }
+}
+
 .arrow{
   margin-left: 8px;
   width: 12px;
