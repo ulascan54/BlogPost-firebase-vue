@@ -3,7 +3,7 @@
     <div class="container">
       <div class="left">
         <div class="col-1">
-          <router-link class="header" :to="{ name: 'home' }">BlogPosts</router-link
+          <router-link class="header" :to="{ name: 'Home' }">BlogPosts</router-link
           >
           <ul>
             <li>
@@ -22,14 +22,14 @@
         </div>
         <div class="col-2">
           <ul>
-            <router-link class="link" :to="{ name: 'home' }">Home</router-link>
-            <router-link class="link" :to="{ name: 'blogs' }"
+            <router-link class="link" :to="{ name: 'Home' }">Home</router-link>
+            <router-link class="link" :to="{ name: 'Blogs' }"
               >Blogs</router-link
             >
             <router-link v-if="user" class="link" :to="{ name: 'newposts' }"
               >Create Post</router-link
             >
-            <router-link v-if="!user" class="link" :to="{ name: 'home' }"
+            <router-link v-if="!user" class="link" :to="{ name: 'Home' }"
               >Login / Register</router-link
             >
           </ul>
