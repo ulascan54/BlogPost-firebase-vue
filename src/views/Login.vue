@@ -94,7 +94,7 @@ export default {
         input {
           width: 100%;
           border: none;
-          background-origin: #f2f7f6;
+          background-color: #f2f7f6;
           padding: 4px 4px 4px 30px;
           height: 50px;
           &:focus {
