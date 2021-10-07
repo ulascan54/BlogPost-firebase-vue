@@ -29,9 +29,9 @@
           <input type="password" placeholder="Password" v-model="password" />
           <password class="icon" />
         </div>
+        <div v-show="error" class="error">{{ this.errorMsg }}</div>
       </div>
-
-      <button>Sign Up</button>
+      <button @click.prevent="register">Sign Up</button>
       <div class="angle"></div>
     </form>
     <div class="background"></div>
@@ -41,6 +41,9 @@
 import email from "../assets/Icons/envelope-regular.svg";
 import password from "../assets/Icons/lock-alt-solid.svg";
 import user from "../assets/Icons/user-alt-light.svg";
+import firebase from "firebase/app";
+import "firebase/auth";
+import db from "../boot/firebaseInit";
 export default {
   components: {
     email,
@@ -49,19 +52,53 @@ export default {
   },
   data() {
     return {
-      email: null,
-      password: null,
-      firstName: null,
-      lastName: null,
-      userName: null,
+      email: '',
+      password: '',
+      firstName: '',
+      lastName: '',
+      userName: '',
+      error: null,
+      errorMsg: "",
     };
+  },
+  methods: {
+    async register() {
+      if (
+        this.email !== "" &&
+        this.password !== "" &&
+        this.firstName !== "" &&
+        this.lastName !== "" &&
+        this.userName !== ""
+      ) {
+        this.error = false;
+        this.errorMsg = "";
+        const firebaseAuth = await firebase.auth();
+        const createUser = await firebaseAuth.createUserWithEmailAndPassword(
+          this.email,
+          this.password
+        );
+        const result = await createUser;
+        const dataBase = db.collection("users").doc(result.user.uid);
+        await dataBase.set({
+          firstName: this.firstName,
+          lastName: this.lastName,
+          userName: this.userName,
+          email: this.email,
+        });
+        this.$router.push({ name: "Home" });
+      }
+      else{
+        this.error = true;
+        this.errorMsg = "Please fill out all the fields";
+      }
+    },
   },
 };
 </script>
 <style lang="scss">
-.register{
-    h2{
-        max-width: 350px;
-    }
+.register {
+  h2 {
+    max-width: 350px;
+  }
 }
 </style>
