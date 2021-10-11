@@ -43,6 +43,10 @@ export default new Vuex.Store({
       state.editPost = payload;
       console.log(state.editPost);
     },
+    updateUser(state,payload){
+      state.user=payload
+    }
+    ,
     setProfileInfo(state, doc) {
       (state.profileId = doc.id), (state.profileEmail = doc.data().email);
       state.profileFristName = doc.data().firstName;
@@ -51,19 +55,18 @@ export default new Vuex.Store({
     },
     setProfileInitials(state) {
       state.profileInitials =
-        state.profileFristName.match(/(\b\S?/g).join("") +
-        state.profileLastName.match(/(\b\S?/g).join("");
+        state.profileFristName.match(/(\b\S)?/g).join("") +
+        state.profileLastName.match(/(\b\S?)?/g).join("");
     },
   },
 
   actions: {
     async getCurrentUser({ commit }) {
-      const dataBase = await db
-        .collection("users")
-        .doc(firebase.auth().currentUser.uid);
+      const dataBase = await db.collection("users").doc(firebase.auth().currentUser.uid);
       const dbResult = await dataBase.get();
       commit("setProfileInfo", dbResult);
       commit("setProfileInitals");
+      console.log(dbResult);
     },
   },
   modules: {},
