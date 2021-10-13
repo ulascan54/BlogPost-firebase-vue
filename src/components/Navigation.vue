@@ -15,9 +15,9 @@
             >Login/Register</router-link
           >
         </ul>
-        <div class="profile" ref="profile">
+        <div @click="toggleProfileMenu" class="profile" ref="profile">
           <span>{{ this.$store.state.profileInitials }}</span>
-          <div class="profile-menu">
+          <div v-show="profileMenu" class="profile-menu">
             <div class="info">
               <p class="initials">{{ this.$store.state.profileInitials }}</p>
               <div class="right">
@@ -76,6 +76,7 @@ export default {
   components: { menuIcon, signOutIcon, adminIcon, userIcon },
   data() {
     return {
+      profileMenu:null,
       mobile: null,
       mobileNav: null,
       windownWidth: null,
@@ -86,6 +87,9 @@ export default {
     this.checkScreen();
   },
   methods: {
+    toggleProfileMenu(){
+      this.profileMenu=!this.profileMenu
+    },
     checkScreen() {
       this.windownWidth = window.innerWidth;
       if (this.windownWidth <= 750) {
