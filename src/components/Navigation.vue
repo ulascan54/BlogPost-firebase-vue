@@ -21,10 +21,7 @@
             <div class="info">
               <p class="initials">{{ this.$store.state.profileInitials }}</p>
               <div class="right">
-                <p>
-                  {{ this.$store.state.profileFirstName }}
-                  {{ this.$store.state.profileLastName }}
-                </p>
+                <p>{{ this.$store.state.profileFirstName }} {{ this.$store.state.profileLastName }}</p>
                 <p>{{ this.$store.state.profileUserName }}</p>
                 <p>{{ this.$store.state.profileEmail }}</p>
               </div>
@@ -42,11 +39,9 @@
                   <p>Admin</p>
                 </router-link>
               </div>
-              <div class="option">
-                <router-link class="option" to="#">
+              <div class="option" @click="signOut">
                   <signOutIcon class="icon" />
                   <p>Sign Out</p>
-                </router-link>
               </div>
             </div>
           </div>
@@ -72,6 +67,8 @@ import menuIcon from "../assets/Icons/bars-regular.svg";
 import userIcon from "../assets/Icons/user-alt-light.svg";
 import adminIcon from "../assets/Icons/user-crown-light.svg";
 import signOutIcon from "../assets/Icons/sign-out-alt-regular.svg";
+import firebase from "firebase/app";
+import "firebase/auth";
 export default {
   components: { menuIcon, signOutIcon, adminIcon, userIcon },
   data() {
@@ -100,9 +97,13 @@ export default {
       this.mobileNav = false;
       return;
     },
-    toggleMobileNav() {
-      this.mobileNav = !this.mobileNav;
+    toggleMobileNav(e) {
+      if(e.target==this.$refs.profile)this.mobileNav = !this.mobileNav;
     },
+    signOut(){
+      firebase.auth().signOut()
+      window.location.reload()
+    }
   },
 };
 </script>
@@ -152,17 +153,22 @@ header {
           margin-right: 0;
         }
       }
-
+  
       .profile {
         position: relative;
         cursor: pointer;
         display: flex;
-        align-content: center;
+        align-items: center;
         justify-content: center;
         width: 40px;
         height: 40px;
         border-radius: 50%;
+        color: #fff;
         background-color: #303030;
+
+        span{
+          pointer-events: none;
+        }
         .profile-menu {
           position: absolute;
           top: 60px;
@@ -184,13 +190,12 @@ header {
               background-color: #fff;
               color: #303030;
               display: flex;
-              align-content: center;
+              align-items: center;
               justify-content: center;
               border-radius: 50%;
             }
             .right{
               flex:1;
-              color:#fff;
               margin-left: 24px;
 
               p:nth-child(1){
