@@ -1,5 +1,5 @@
 <template>
-  <div class="blog-wrapper no-user">
+  <div class="blog-wrapper" :class="{ nouser: !user }">
     <div class="blog-content">
       <div>
         <h2 v-if="post.welcomeScreen">{{ post.title }}</h2>
@@ -15,16 +15,16 @@
       </div>
     </div>
     <div class="blog-photo">
-    <img
+      <img
         v-if="post.welcomeScreen"
         :src="require(`../assets/blogPhotos/${post.photo}.jpg`)"
         :alt="post.photo"
-    />
-    <img
+      />
+      <img
         v-else
         :src="require(`../assets/blogPhotos/${post.blogCoverPhoto}.jpg`)"
         :alt="post.blogCoverPhoto"
-    />
+      />
     </div>
   </div>
 </template>
@@ -34,6 +34,11 @@ import Arrow from "../assets/Icons/arrow-right-light.svg";
 export default {
   props: ["post"],
   components: { Arrow },
+  computed: {
+    user() {
+      return this.$store.state.user;
+    },
+  },
 };
 </script>
 
@@ -49,7 +54,7 @@ export default {
     flex-direction: row;
   }
   .blog-content {
-      flex: 4;
+    flex: 4;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -61,85 +66,86 @@ export default {
     @media (min-width: 800px) {
       flex: 3;
     }
-    div{
-        max-width: 375px;
-        padding: 72px 24px;
-        @media(min-width:700px){
-            padding: 0 24px;
+    div {
+      max-width: 375px;
+      padding: 72px 24px;
+      @media (min-width: 700px) {
+        padding: 0 24px;
+      }
+      h2 {
+        font-size: 32px;
+        font-weight: 300;
+        text-transform: uppercase;
+        margin-bottom: 24px;
+        @media (min-width: 700px) {
+          font-size: 40px;
         }
-        h2{
-            font-size: 32px;
-            font-weight: 300;
-            text-transform: uppercase;
-            margin-bottom:24px;
-            @media (min-width:700px) {
-                font-size: 40px;
-            }
-        }
+      }
 
-        p{
-            font-size: 15px;
-            font-weight: 300;
-            line-height: 1.7;
+      p {
+        font-size: 15px;
+        font-weight: 300;
+        line-height: 1.7;
+      }
+      .content-preview {
+        font-size: 13px;
+        max-height: 24px;
+        width: 250px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .link {
+        display: inline-block;
+        align-items: center;
+        margin-top: 32px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid transparent;
+        transition: 0.5s ease-in all;
+        &:hover {
+          border-bottom-color: #303030;
         }
-        .content-preview{
-            font-size: 13px;
-            max-height: 24px;
-            width: 250px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .link{
-            display: inline-block;
-            align-items: center;
-            margin-top: 32px;
-            padding-bottom: 4px;
-            border-bottom:1px solid transparent;
-            transition:0.5s ease-in all;
-            &:hover{
-            border-bottom-color:#303030;
-        }
-        }
+      }
 
-        .link-light{
-            &:hover{
-                border-bottom-color:#fff
-            }
+      .link-light {
+        &:hover {
+          border-bottom-color: #fff;
         }
+      }
     }
   }
-  .blog-photo{
-    flex:3;
+  .blog-photo {
+    flex: 3;
     order: 1;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    @media (min-width:700px) {
-        order:2
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    @media (min-width: 700px) {
+      order: 2;
     }
-    @media (min-width:800px) {
-        flex:4
+    @media (min-width: 800px) {
+      flex: 4;
     }
-    img{
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   }
 
-  &:nth-child(even){
-      .blog-content{
-          order:2;
-      }
-      .blog-photo{
-          order:1;
-      }
+  &:nth-child(even) {
+    .blog-content {
+      order: 2;
+    }
+    .blog-photo {
+      order: 1;
+    }
   }
 }
-.no-user:first-child{
-    .blog-content{
-        background-color: #303030;
-        color:#fff
-    }
+.no-user:first-child {
+  .blog-content {
+    background-color: #303030;
+    color: #fff;
+  }
 }
 </style>
