@@ -41,7 +41,7 @@
               </div>
               <div class="option" @click="signOut">
                   <signOutIcon class="icon" />
-                  <p>Sign Out</p>
+                  <p>Çıkış Yap</p>
               </div>
             </div>
           </div>
