@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       welcomeScreen:{
-        title:'Hoşgeldiniz',
+        title:'Hoş geldiniz',
         blogPost:
         'Haftalık blog yazıları programcılıkla ilgili herşey HTML,CSS,JavaScript ve çok daha fazlası. Bugün kayıt ve hiç bir gönderiyi kaçırma.',
         welcomeScreen:true,
