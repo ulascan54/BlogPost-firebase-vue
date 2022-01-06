@@ -34,7 +34,7 @@ export default {
       welcomeScreen:{
         title:'Hoş geldiniz',
         blogPost:
-        'Haftalık blog yazıları programcılıkla ilgili herşey HTML,CSS,JavaScript ve çok daha fazlası. Bugün kayıt ve hiç bir gönderiyi kaçırma.',
+        'Haftalık blog yazıları programcılık ile ilgili her şey HTML,CSS,JavaScript ve çok daha fazlası. Bugün kayıt ve hiç bir gönderiyi kaçırma.',
         welcomeScreen:true,
         photo:'coding'
       },
